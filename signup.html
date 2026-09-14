@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>JAYRIX - Sign Up</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -17,28 +19,32 @@
 
     <h2>Create Account</h2>
 
-    <form>
+    <form id="signupForm">
 
         <input
             type="text"
+            id="username"
             placeholder="Username"
             required
         >
 
         <input
             type="email"
+            id="email"
             placeholder="Email"
             required
         >
 
         <input
             type="password"
+            id="password"
             placeholder="Password"
             required
         >
 
         <input
             type="password"
+            id="confirmPassword"
             placeholder="Confirm password"
             required
         >
@@ -49,12 +55,111 @@
 
     </form>
 
+    <p id="message"></p>
+
     <p>
         Already have an account?
         <a href="login.html">Login</a>
     </p>
 
 </div>
+
+
+<script>
+
+document
+.getElementById("signupForm")
+.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const username =
+        document.getElementById("username").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    const message =
+        document.getElementById("message");
+
+
+    if (password !== confirmPassword) {
+
+        message.textContent =
+            "Passwords do not match.";
+
+        message.style.color = "#ff4d6d";
+
+        return;
+    }
+
+
+    try {
+
+        const response = await fetch("/api/signup", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                username: username,
+                email: email,
+                password: password
+
+            })
+
+        });
+
+
+        const data = await response.json();
+
+
+        if (data.success) {
+
+            message.textContent =
+                "Account created successfully!";
+
+            message.style.color = "#1683ff";
+
+
+            setTimeout(function() {
+
+                window.location.href =
+                    "login.html";
+
+            }, 1000);
+
+        } else {
+
+            message.textContent =
+                data.message;
+
+            message.style.color = "#ff4d6d";
+
+        }
+
+    } catch (error) {
+
+        message.textContent =
+            "Unable to connect to JAYRIX.";
+
+        message.style.color = "#ff4d6d";
+
+    }
+
+});
+
+</script>
 
 </body>
 </html>
