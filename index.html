@@ -7,11 +7,12 @@
     <title>JAYRIX Messenger</title>
 
     <!-- PWA -->
-    <meta name="theme-color" content="#087cff">
+    <meta name="theme-color" content="#050a14">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -19,30 +20,65 @@
             font-family: Arial, sans-serif;
         }
 
+        :root {
+            --blue: #1683ff;
+            --blue-bright: #35a7ff;
+            --dark: #050a14;
+            --dark-2: #080f1c;
+            --dark-3: #0c1524;
+            --line: rgba(255,255,255,0.07);
+            --text: #f4f8ff;
+            --muted: #7f8da3;
+        }
+
         body {
-            background: #eef3f8;
-            color: #111;
+            background:
+                radial-gradient(circle at 50% -10%, rgba(22,131,255,0.16), transparent 40%),
+                #02050b;
+
+            color: var(--text);
             height: 100vh;
             overflow: hidden;
         }
+
+        /* APP */
 
         .app {
             width: 100%;
             max-width: 600px;
             height: 100vh;
             margin: auto;
-            background: white;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #07101d 0%,
+                    #050a14 45%,
+                    #03070e 100%
+                );
+
             display: flex;
             flex-direction: column;
             position: relative;
+            overflow: hidden;
         }
 
         /* HEADER */
 
         .header {
-            background: #087cff;
-            color: white;
-            padding: 18px 16px 10px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(13,32,58,0.98),
+                    rgba(5,12,24,0.98)
+                );
+
+            padding: 18px 16px 14px;
+
+            border-bottom: 1px solid rgba(22,131,255,0.15);
+
+            box-shadow:
+                0 8px 30px rgba(0,0,0,0.35);
         }
 
         .top-bar {
@@ -51,39 +87,78 @@
             align-items: center;
         }
 
+        /* LOGO */
+
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 11px;
         }
 
         .logo {
-            width: 42px;
-            height: 42px;
-            background: white;
-            color: #087cff;
-            border-radius: 50% 50% 50% 8px;
+            width: 43px;
+            height: 43px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #35a7ff,
+                    #087cff
+                );
+
+            color: white;
+
+            border-radius:
+                50% 50% 50% 9px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             font-size: 22px;
             font-weight: bold;
+
+            box-shadow:
+                0 0 12px rgba(22,131,255,0.55),
+                inset 0 0 8px rgba(255,255,255,0.18);
         }
 
         .brand {
             font-size: 24px;
             font-weight: bold;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #6ebfff
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
+        /* HEADER ICONS */
 
         .header-icons {
             display: flex;
-            gap: 18px;
-            font-size: 22px;
+            gap: 17px;
+            font-size: 23px;
         }
 
         .icon {
+            color: #b8c9df;
             cursor: pointer;
+
+            transition:
+                color 0.2s,
+                transform 0.2s;
+        }
+
+        .icon:hover {
+            color: var(--blue-bright);
+            transform: scale(1.1);
         }
 
         /* SEARCH */
@@ -94,643 +169,65 @@
 
         .search {
             width: 100%;
-            border: none;
+
+            border: 1px solid rgba(255,255,255,0.06);
             outline: none;
-            padding: 13px 16px;
+
+            padding: 13px 17px;
+
             border-radius: 25px;
+
             font-size: 15px;
-            background: white;
-            color: #333;
+
+            background:
+                rgba(255,255,255,0.045);
+
+            color: white;
+
+            box-shadow:
+                inset 0 1px 8px rgba(0,0,0,0.25);
+
+            transition:
+                border 0.2s,
+                box-shadow 0.2s;
+        }
+
+        .search::placeholder {
+            color: #65748a;
+        }
+
+        .search:focus {
+            border-color: rgba(22,131,255,0.55);
+
+            box-shadow:
+                0 0 15px rgba(22,131,255,0.12);
         }
 
         /* TABS */
 
         .tabs {
             display: flex;
-            background: white;
-            border-bottom: 1px solid #ddd;
+
+            background:
+                rgba(4,9,17,0.95);
+
+            border-bottom: 1px solid var(--line);
         }
 
         .tab {
             flex: 1;
+
             padding: 15px 5px;
+
             text-align: center;
+
             font-weight: bold;
-            color: #777;
+
+            color: #65748a;
+
             cursor: pointer;
+
             position: relative;
-        }
 
-        .tab.active {
-            color: #087cff;
-        }
-
-        .tab.active::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background: #087cff;
-            border-radius: 5px;
-        }
-
-        /* CHAT LIST */
-
-        .content {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .chat {
-            display: flex;
-            align-items: center;
-            padding: 14px 16px;
-            gap: 13px;
-            cursor: pointer;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .chat:hover {
-            background: #f5f9ff;
-        }
-
-        .avatar {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: #087cff;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 19px;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .chat-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .chat-top {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .name {
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .time {
-            font-size: 12px;
-            color: #888;
-        }
-
-        .message {
-            margin-top: 5px;
-            color: #777;
-            font-size: 14px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .unread {
-            background: #087cff;
-            color: white;
-            min-width: 20px;
-            height: 20px;
-            padding: 0 5px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        /* FLOATING BUTTON */
-
-        .new-chat {
-            position: absolute;
-            right: 20px;
-            bottom: 25px;
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            border: none;
-            background: #087cff;
-            color: white;
-            font-size: 27px;
-            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.25);
-            cursor: pointer;
-        }
-
-        .new-chat:active {
-            transform: scale(0.94);
-        }
-
-        /* EMPTY STATE */
-
-        .empty {
-            display: none;
-            text-align: center;
-            padding: 70px 20px;
-            color: #777;
-        }
-
-        .empty-icon {
-            font-size: 55px;
-            margin-bottom: 15px;
-        }
-
-        .empty h2 {
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        /* DESKTOP */
-
-        @media (min-width: 700px) {
-            body {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .app {
-                height: 95vh;
-                border-radius: 15px;
-                overflow: hidden;
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="app">
-
-    <!-- HEADER -->
-    <header class="header">
-
-        <div class="top-bar">
-
-            <div class="logo-section">
-
-                <div class="logo">
-                    J
-                </div>
-
-                <div class="brand">
-                    JAYRIX
-                </div>
-
-            </div>
-
-            <div class="header-icons">
-                <span class="icon">⌕</span>
-                <span class="icon">⋮</span>
-            </div>
-
-        </div>
-
-        <div class="search-container">
-            <input
-                type="text"
-                id="search"
-                class="search"
-                placeholder="Search chats..."
-                oninput="searchChats()"
-            >
-        </div>
-
-    </header>
-
-
-    <!-- TABS -->
-
-    <div class="tabs">
-
-        <div
-            class="tab active"
-            id="chatsTab"
-            onclick="showTab('chats')"
-        >
-            Chats
-        </div>
-
-        <div
-            class="tab"
-            id="statusTab"
-            onclick="showTab('status')"
-        >
-            Status
-        </div>
-
-        <div
-            class="tab"
-            id="callsTab"
-            onclick="showTab('calls')"
-        >
-            Calls
-        </div>
-
-    </div>
-
-
-    <!-- CONTENT -->
-
-    <main class="content">
-
-        <!-- CHATS -->
-
-        <div id="chats">
-
-            <div class="chat" onclick="openChat('David')">
-
-                <div class="avatar">
-                    D
-                </div>
-
-                <div class="chat-info">
-
-                    <div class="chat-top">
-
-                        <span class="name">
-                            David
-                        </span>
-
-                        <span class="time">
-                            10:32 AM
-                        </span>
-
-                    </div>
-
-                    <div class="message">
-                        Hey bro, what's up?
-                    </div>
-
-                </div>
-
-                <div class="unread">
-                    2
-                </div>
-
-            </div>
-
-
-            <div class="chat" onclick="openChat('Michael')">
-
-                <div class="avatar">
-                    M
-                </div>
-
-                <div class="chat-info">
-
-                    <div class="chat-top">
-
-                        <span class="name">
-                            Michael
-                        </span>
-
-                        <span class="time">
-                            9:48 AM
-                        </span>
-
-                    </div>
-
-                    <div class="message">
-                        I'll send it to you later.
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="chat" onclick="openChat('Daniel')">
-
-                <div class="avatar">
-                    D
-                </div>
-
-                <div class="chat-info">
-
-                    <div class="chat-top">
-
-                        <span class="name">
-                            Daniel
-                        </span>
-
-                        <span class="time">
-                            Yesterday
-                        </span>
-
-                    </div>
-
-                    <div class="message">
-                        That game looks crazy 🔥
-                    </div>
-
-                </div>
-
-                <div class="unread">
-                    5
-                </div>
-
-            </div>
-
-
-            <div class="chat" onclick="openChat('Sarah')">
-
-                <div class="avatar">
-                    S
-                </div>
-
-                <div class="chat-info">
-
-                    <div class="chat-top">
-
-                        <span class="name">
-                            Sarah
-                        </span>
-
-                        <span class="time">
-                            Yesterday
-                        </span>
-
-                    </div>
-
-                    <div class="message">
-                        Okay, see you tomorrow.
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="chat" onclick="openChat('JAYRIX Team')">
-
-                <div class="avatar">
-                    J
-                </div>
-
-                <div class="chat-info">
-
-                    <div class="chat-top">
-
-                        <span class="name">
-                            JAYRIX Team
-                        </span>
-
-                        <span class="time">
-                            Monday
-                        </span>
-
-                    </div>
-
-                    <div class="message">
-                        Welcome to JAYRIX!
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- STATUS -->
-
-        <div id="status" style="display:none;">
-
-            <div class="chat">
-
-                <div class="avatar">
-                    +
-                </div>
-
-                <div class="chat-info">
-
-                    <div class="name">
-                        My Status
-                    </div>
-
-                    <div class="message">
-                        Tap to add a status update
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="chat">
-
-                <div class="avatar">
-                    A
-                </div>
-
-                <div class="chat-info">
-
-                    <div class="name">
-                        Alex
-                    </div>
-
-                    <div class="message">
-                        Today, 8:45 AM
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- CALLS -->
-
-        <div id="calls" style="display:none;">
-
-            <div class="chat">
-
-                <div class="avatar">
-                    D
-                </div>
-
-                <div class="chat-info">
-
-                    <div class="name">
-                        David
-                    </div>
-
-                    <div class="message">
-                        ↗ Incoming voice call • Today
-                    </div>
-
-                </div>
-
-                <div style="font-size:20px;color:#087cff;">
-                    ☎
-                </div>
-
-            </div>
-
-            <div class="chat">
-
-                <div class="avatar">
-                    M
-                </div>
-
-                <div class="chat-info">
-
-                    <div class="name">
-                        Michael
-                    </div>
-
-                    <div class="message">
-                        ↙ Outgoing voice call • Yesterday
-                    </div>
-
-                </div>
-
-                <div style="font-size:20px;color:#087cff;">
-                    ☎
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- EMPTY SEARCH -->
-
-        <div class="empty" id="empty">
-
-            <div class="empty-icon">
-                🔍
-            </div>
-
-            <h2>
-                No chats found
-            </h2>
-
-            <p>
-                Try searching for another name.
-            </p>
-
-        </div>
-
-    </main>
-
-
-    <!-- NEW CHAT -->
-
-    <button
-        class="new-chat"
-        onclick="newChat()"
-        aria-label="New chat"
-    >
-        +
-    </button>
-
-</div>
-
-
-<script>
-
-    function showTab(tab) {
-
-        const chats = document.getElementById("chats");
-        const status = document.getElementById("status");
-        const calls = document.getElementById("calls");
-
-        const chatsTab = document.getElementById("chatsTab");
-        const statusTab = document.getElementById("statusTab");
-        const callsTab = document.getElementById("callsTab");
-
-        chats.style.display = "none";
-        status.style.display = "none";
-        calls.style.display = "none";
-
-        chatsTab.classList.remove("active");
-        statusTab.classList.remove("active");
-        callsTab.classList.remove("active");
-
-        if (tab === "chats") {
-            chats.style.display = "block";
-            chatsTab.classList.add("active");
-        }
-
-        if (tab === "status") {
-            status.style.display = "block";
-            statusTab.classList.add("active");
-        }
-
-        if (tab === "calls") {
-            calls.style.display = "block";
-            callsTab.classList.add("active");
-        }
-    }
-
-
-    function searchChats() {
-
-        const search = document
-            .getElementById("search")
-            .value
-            .toLowerCase();
-
-        const chats = document.querySelectorAll("#chats .chat");
-
-        let found = false;
-
-        chats.forEach(chat => {
-
-            const name = chat
-                .querySelector(".name")
-                .textContent
-                .toLowerCase();
-
-            if (name.includes(search)) {
-                chat.style.display = "flex";
-                found = true;
-            } else {
-                chat.style.display = "none";
-            }
-
-        });
-
-        document.getElementById("empty").style.display =
-            found || search === "" ? "none" : "block";
-    }
-
-
-    function openChat(name) {
-
-        alert("Opening chat with " + name);
-
-        // Later we will replace this with
-        // the real JAYRIX chat screen.
-    }
-
-
-    function newChat() {
-
-        alert("New chat feature coming next.");
-
-        // Later we will connect this to
-        // user search and real conversations.
-    }
-
-</script>
-
-</body>
-</html>
+            transition:
+                color 0.2s
