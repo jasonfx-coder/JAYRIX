@@ -1,26 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>JAYRIX Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAYRIX - Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+<div class="auth-container">
+
+    <div class="logo">J</div>
 
     <h1>JAYRIX</h1>
 
-    <h2>Login</h2>
+    <h2>Welcome Back</h2>
 
-    <input type="email" placeholder="Email">
-    <br><br>
+    <form>
 
-    <input type="password" placeholder="Password">
-    <br><br>
+        <input
+            type="email"
+            placeholder="Email"
+            required
+        >
 
-    <button>Login</button>
+        <input
+            type="password"
+            placeholder="Password"
+            required
+        >
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
 
     <p>
         Don't have an account?
         <a href="signup.html">Sign up</a>
     </p>
+
+</div>
 
 </body>
 </html>
