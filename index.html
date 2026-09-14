@@ -230,4 +230,795 @@
             position: relative;
 
             transition:
-                color 0.2s
+                color 0.2s;
+        }
+
+        .tab.active {
+            color: #43aaff;
+
+            text-shadow:
+                0 0 12px rgba(22,131,255,0.55);
+        }
+
+        .tab.active::after {
+            content: "";
+
+            position: absolute;
+
+            bottom: 0;
+            left: 25%;
+
+            width: 50%;
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #087cff,
+                    #42b2ff
+                );
+
+            border-radius: 5px;
+
+            box-shadow:
+                0 0 10px rgba(22,131,255,0.8);
+        }
+
+        /* CONTENT */
+
+        .content {
+            flex: 1;
+            overflow-y: auto;
+
+            scrollbar-width: thin;
+            scrollbar-color: #12375d transparent;
+        }
+
+        .content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .content::-webkit-scrollbar-thumb {
+            background: #12375d;
+            border-radius: 10px;
+        }
+
+        /* CHAT */
+
+        .chat {
+            display: flex;
+            align-items: center;
+
+            padding: 14px 16px;
+
+            gap: 13px;
+
+            cursor: pointer;
+
+            border-bottom: 1px solid var(--line);
+
+            transition:
+                background 0.2s,
+                padding-left 0.2s;
+        }
+
+        .chat:hover {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(22,131,255,0.08),
+                    transparent
+                );
+
+            padding-left: 20px;
+        }
+
+        /* AVATAR */
+
+        .avatar {
+            width: 52px;
+            height: 52px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #116bc7,
+                    #063b76
+                );
+
+            border: 1px solid rgba(58,168,255,0.3);
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+            font-weight: bold;
+
+            flex-shrink: 0;
+
+            box-shadow:
+                0 0 12px rgba(22,131,255,0.14);
+        }
+
+        /* CHAT INFO */
+
+        .chat-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .chat-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .name {
+            font-size: 16px;
+            font-weight: bold;
+
+            color: #edf5ff;
+        }
+
+        .time {
+            font-size: 12px;
+            color: #66768d;
+        }
+
+        .message {
+            margin-top: 5px;
+
+            color: #77879d;
+
+            font-size: 14px;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* UNREAD */
+
+        .unread {
+            background:
+                linear-gradient(
+                    135deg,
+                    #1691ff,
+                    #0065d4
+                );
+
+            color: white;
+
+            min-width: 20px;
+            height: 20px;
+
+            padding: 0 5px;
+
+            border-radius: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 11px;
+            font-weight: bold;
+
+            box-shadow:
+                0 0 10px rgba(22,131,255,0.4);
+        }
+
+        /* FLOATING NEW CHAT */
+
+        .new-chat {
+            position: absolute;
+
+            right: 20px;
+            bottom: 25px;
+
+            width: 58px;
+            height: 58px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(110,191,255,0.5);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1691ff,
+                    #005bc1
+                );
+
+            color: white;
+
+            font-size: 29px;
+
+            box-shadow:
+                0 0 22px rgba(22,131,255,0.45),
+                0 8px 20px rgba(0,0,0,0.4);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+        .new-chat:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 0 30px rgba(22,131,255,0.65),
+                0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .new-chat:active {
+            transform: scale(0.92);
+        }
+
+        /* EMPTY STATE */
+
+        .empty {
+            display: none;
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            color: #6c7c92;
+        }
+
+        .empty-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+
+            filter:
+                drop-shadow(
+                    0 0 12px rgba(22,131,255,0.4)
+                );
+        }
+
+        .empty h2 {
+            color: #dceaff;
+            margin-bottom: 8px;
+        }
+
+        /* STATUS / CALL EXTRA */
+
+        #status,
+        #calls {
+            background: transparent;
+        }
+
+        #calls .chat > div:last-child {
+            text-shadow:
+                0 0 10px rgba(22,131,255,0.6);
+        }
+
+        /* DESKTOP */
+
+        @media (min-width: 700px) {
+
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .app {
+                height: 95vh;
+
+                border-radius: 18px;
+
+                border: 1px solid rgba(22,131,255,0.14);
+
+                box-shadow:
+                    0 0 50px rgba(0,0,0,0.7),
+                    0 0 25px rgba(22,131,255,0.08);
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="top-bar">
+
+            <div class="logo-section">
+
+                <div class="logo">
+                    J
+                </div>
+
+                <div class="brand">
+                    JAYRIX
+                </div>
+
+            </div>
+
+            <div class="header-icons">
+
+                <span class="icon">
+                    ⌕
+                </span>
+
+                <span class="icon">
+                    ⋮
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-container">
+
+            <input
+                type="text"
+                id="search"
+                class="search"
+                placeholder="Search chats..."
+                oninput="searchChats()"
+            >
+
+        </div>
+
+    </header>
+
+
+    <!-- TABS -->
+
+    <div class="tabs">
+
+        <div
+            class="tab active"
+            id="chatsTab"
+            onclick="showTab('chats')"
+        >
+            Chats
+        </div>
+
+        <div
+            class="tab"
+            id="statusTab"
+            onclick="showTab('status')"
+        >
+            Status
+        </div>
+
+        <div
+            class="tab"
+            id="callsTab"
+            onclick="showTab('calls')"
+        >
+            Calls
+        </div>
+
+    </div>
+
+
+    <!-- CONTENT -->
+
+    <main class="content">
+
+        <!-- CHATS -->
+
+        <div id="chats">
+
+            <div
+                class="chat"
+                onclick="openChat('David')"
+            >
+
+                <div class="avatar">
+                    D
+                </div>
+
+                <div class="chat-info">
+
+                    <div class="chat-top">
+
+                        <span class="name">
+                            David
+                        </span>
+
+                        <span class="time">
+                            10:32 AM
+                        </span>
+
+                    </div>
+
+                    <div class="message">
+                        Hey bro, what's up?
+                    </div>
+
+                </div>
+
+                <div class="unread">
+                    2
+                </div>
+
+            </div>
+
+
+            <div
+                class="chat"
+                onclick="openChat('Michael')"
+            >
+
+                <div class="avatar">
+                    M
+                </div>
+
+                <div class="chat-info">
+
+                    <div class="chat-top">
+
+                        <span class="name">
+                            Michael
+                        </span>
+
+                        <span class="time">
+                            9:48 AM
+                        </span>
+
+                    </div>
+
+                    <div class="message">
+                        I'll send it to you later.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="chat"
+                onclick="openChat('Daniel')"
+            >
+
+                <div class="avatar">
+                    D
+                </div>
+
+                <div class="chat-info">
+
+                    <div class="chat-top">
+
+                        <span class="name">
+                            Daniel
+                        </span>
+
+                        <span class="time">
+                            Yesterday
+                        </span>
+
+                    </div>
+
+                    <div class="message">
+                        That game looks crazy 🔥
+                    </div>
+
+                </div>
+
+                <div class="unread">
+                    5
+                </div>
+
+            </div>
+
+
+            <div
+                class="chat"
+                onclick="openChat('Sarah')"
+            >
+
+                <div class="avatar">
+                    S
+                </div>
+
+                <div class="chat-info">
+
+                    <div class="chat-top">
+
+                        <span class="name">
+                            Sarah
+                        </span>
+
+                        <span class="time">
+                            Yesterday
+                        </span>
+
+                    </div>
+
+                    <div class="message">
+                        Okay, see you tomorrow.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="chat"
+                onclick="openChat('JAYRIX Team')"
+            >
+
+                <div class="avatar">
+                    J
+                </div>
+
+                <div class="chat-info">
+
+                    <div class="chat-top">
+
+                        <span class="name">
+                            JAYRIX Team
+                        </span>
+
+                        <span class="time">
+                            Monday
+                        </span>
+
+                    </div>
+
+                    <div class="message">
+                        Welcome to JAYRIX!
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div
+            id="status"
+            style="display:none;"
+        >
+
+            <div class="chat">
+
+                <div class="avatar">
+                    +
+                </div>
+
+                <div class="chat-info">
+
+                    <div class="name">
+                        My Status
+                    </div>
+
+                    <div class="message">
+                        Tap to add a status update
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="chat">
+
+                <div class="avatar">
+                    A
+                </div>
+
+                <div class="chat-info">
+
+                    <div class="name">
+                        Alex
+                    </div>
+
+                    <div class="message">
+                        Today, 8:45 AM
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CALLS -->
+
+        <div
+            id="calls"
+            style="display:none;"
+        >
+
+            <div class="chat">
+
+                <div class="avatar">
+                    D
+                </div>
+
+                <div class="chat-info">
+
+                    <div class="name">
+                        David
+                    </div>
+
+                    <div class="message">
+                        ↗ Incoming voice call • Today
+                    </div>
+
+                </div>
+
+                <div
+                    style="
+                    font-size:20px;
+                    color:#35a7ff;
+                    "
+                >
+                    ☎
+                </div>
+
+            </div>
+
+
+            <div class="chat">
+
+                <div class="avatar">
+                    M
+                </div>
+
+                <div class="chat-info">
+
+                    <div class="name">
+                        Michael
+                    </div>
+
+                    <div class="message">
+                        ↙ Outgoing voice call • Yesterday
+                    </div>
+
+                </div>
+
+                <div
+                    style="
+                    font-size:20px;
+                    color:#35a7ff;
+                    "
+                >
+                    ☎
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- EMPTY SEARCH -->
+
+        <div
+            class="empty"
+            id="empty"
+        >
+
+            <div class="empty-icon">
+                🔍
+            </div>
+
+            <h2>
+                No chats found
+            </h2>
+
+            <p>
+                Try searching for another name.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- NEW CHAT -->
+
+    <button
+        class="new-chat"
+        onclick="newChat()"
+        aria-label="New chat"
+    >
+        +
+    </button>
+
+</div>
+
+
+<script>
+
+    function showTab(tab) {
+
+        const chats =
+            document.getElementById("chats");
+
+        const status =
+            document.getElementById("status");
+
+        const calls =
+            document.getElementById("calls");
+
+
+        const chatsTab =
+            document.getElementById("chatsTab");
+
+        const statusTab =
+            document.getElementById("statusTab");
+
+        const callsTab =
+            document.getElementById("callsTab");
+
+
+        chats.style.display = "none";
+        status.style.display = "none";
+        calls.style.display = "none";
+
+
+        chatsTab.classList.remove("active");
+        statusTab.classList.remove("active");
+        callsTab.classList.remove("active");
+
+
+        if (tab === "chats") {
+
+            chats.style.display = "block";
+
+            chatsTab.classList.add("active");
+
+        }
+
+
+        if (tab === "status") {
+
+            status.style.display = "block";
+
+            statusTab.classList.add("active");
+
+        }
+
+
+        if (tab === "calls") {
+
+            calls.style.display = "block";
+
+            callsTab.classList.add("active");
+
+        }
+
+    }
+
+
+    function searchChats() {
+
+        const search =
+            document
+            .getElementById("search")
+            .value
+            .toLowerCase();
+
+
+        const chats =
+            document.querySelectorAll(
+                "#chats .chat"
+            )
