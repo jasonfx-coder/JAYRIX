@@ -3,586 +3,1007 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>JAYRIX Messenger</title>
+<title>JAYRIX Messenger</title>
 
-    <meta
-        name="theme-color"
-        content="#050a14"
-    >
+<meta
+    name="theme-color"
+    content="#050a14"
+>
 
-    <meta
-        name="mobile-web-app-capable"
-        content="yes"
-    >
+<style>
 
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes"
-    >
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 
-    <style>
+:root {
+    --blue: #1683ff;
+    --bright: #43b1ff;
+    --dark: #02060d;
+    --panel: #07101d;
+    --panel2: #0b1727;
+    --line: rgba(255,255,255,.07);
+    --text: #f4f8ff;
+    --muted: #718198;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
 
-        :root {
-            --blue: #1683ff;
-            --blue-bright: #35a7ff;
-            --dark: #050a14;
-            --dark-2: #080f1c;
-            --dark-3: #0c1524;
-            --line: rgba(255,255,255,0.07);
-            --text: #f4f8ff;
-            --muted: #7f8da3;
-        }
+body {
 
-        html,
-        body {
-            width: 100%;
-            min-height: 100%;
-        }
+    min-height: 100vh;
 
-        body {
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(22,131,255,.18),
+            transparent 42%
+        ),
+        #02050b;
 
-            background:
-                radial-gradient(
-                    circle at 50% -10%,
-                    rgba(22,131,255,0.16),
-                    transparent 40%
-                ),
-                #02050b;
+    color: var(--text);
 
-            color: var(--text);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 
-            min-height: 100vh;
+.app {
 
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
+    width: 100%;
 
+    max-width: 620px;
 
-        /* APP */
+    min-height: 100vh;
 
-        .app {
+    margin: auto;
 
-            width: 100%;
+    background:
+        linear-gradient(
+            180deg,
+            #07101d,
+            #03070e
+        );
 
-            max-width: 600px;
+    position: relative;
 
-            min-height: 100vh;
+    overflow: hidden;
+}
 
-            margin: auto;
 
-            background:
-                linear-gradient(
-                    180deg,
-                    #07101d 0%,
-                    #050a14 45%,
-                    #03070e 100%
-                );
+/* HEADER */
 
-            display: flex;
+.header {
 
-            flex-direction: column;
+    padding: 18px 16px 14px;
 
-            position: relative;
-        }
+    background:
+        linear-gradient(
+            135deg,
+            #0b1c32,
+            #050b15
+        );
 
+    border-bottom:
+        1px solid
+        rgba(22,131,255,.15);
 
-        /* HEADER */
+    position: sticky;
 
-        .header {
+    top: 0;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(13,32,58,0.98),
-                    rgba(5,12,24,0.98)
-                );
+    z-index: 20;
+}
 
-            padding: 18px 16px 14px;
+.top {
 
-            border-bottom:
-                1px solid rgba(22,131,255,0.15);
+    display: flex;
 
-            box-shadow:
-                0 8px 30px rgba(0,0,0,0.35);
+    justify-content: space-between;
 
-            position: sticky;
+    align-items: center;
+}
 
-            top: 0;
+.brand-box {
 
-            z-index: 10;
-        }
+    display: flex;
 
+    align-items: center;
 
-        /* TOP BAR */
+    gap: 11px;
+}
 
-        .top-bar {
+.logo {
 
-            display: flex;
+    width: 43px;
+    height: 43px;
 
-            justify-content: space-between;
+    border-radius:
+        50% 50% 50% 9px;
 
-            align-items: center;
-        }
+    display: flex;
 
+    align-items: center;
+    justify-content: center;
 
-        /* LOGO */
+    font-weight: bold;
 
-        .logo-section {
+    font-size: 22px;
 
-            display: flex;
+    background:
+        linear-gradient(
+            135deg,
+            #35a7ff,
+            #087cff
+        );
 
-            align-items: center;
+    box-shadow:
+        0 0 18px
+        rgba(22,131,255,.45);
+}
 
-            gap: 11px;
-        }
+.brand {
 
-        .logo {
+    font-size: 24px;
 
-            width: 43px;
-            height: 43px;
+    font-weight: bold;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #35a7ff,
-                    #087cff
-                );
+    letter-spacing: 2px;
 
-            color: white;
+    background:
+        linear-gradient(
+            90deg,
+            white,
+            #66bcff
+        );
 
-            border-radius:
-                50% 50% 50% 9px;
+    -webkit-background-clip: text;
 
-            display: flex;
+    -webkit-text-fill-color: transparent;
+}
 
-            align-items: center;
+.menu-button {
 
-            justify-content: center;
+    border: none;
 
-            font-size: 22px;
+    background: transparent;
 
-            font-weight: bold;
+    color: #bcd0e8;
 
-            box-shadow:
-                0 0 12px rgba(22,131,255,0.55),
-                inset 0 0 8px rgba(255,255,255,0.18);
-        }
+    font-size: 28px;
 
-        .brand {
+    cursor: pointer;
+}
 
-            font-size: 24px;
+.menu-button:active {
+    transform: scale(.9);
+}
 
-            font-weight: bold;
 
-            letter-spacing: 2px;
+/* SEARCH */
 
-            background:
-                linear-gradient(
-                    90deg,
-                    #ffffff,
-                    #6ebfff
-                );
+.search {
 
-            -webkit-background-clip: text;
+    width: 100%;
 
-            -webkit-text-fill-color: transparent;
-        }
+    margin-top: 15px;
 
+    padding: 13px 17px;
 
-        /* ICONS */
+    border-radius: 25px;
 
-        .header-icons {
+    border:
+        1px solid
+        rgba(255,255,255,.06);
 
-            display: flex;
+    outline: none;
 
-            gap: 17px;
+    background:
+        rgba(255,255,255,.045);
 
-            font-size: 23px;
-        }
+    color: white;
 
-        .icon {
+    font-size: 15px;
+}
 
-            color: #b8c9df;
+.search::placeholder {
+    color: #64748a;
+}
 
-            cursor: pointer;
 
-            user-select: none;
+/* TABS */
 
-            transition:
-                color 0.2s,
-                transform 0.2s;
-        }
+.tabs {
 
-        .icon:active {
+    display: flex;
 
-            color: var(--blue-bright);
+    background:
+        #040914;
 
-            transform: scale(0.9);
-        }
+    border-bottom:
+        1px solid
+        var(--line);
 
+    position: sticky;
 
-        /* SEARCH */
+    top: 91px;
 
-        .search-container {
+    z-index: 19;
+}
 
-            margin-top: 15px;
-        }
+.tab {
 
-        .search {
+    flex: 1;
 
-            width: 100%;
+    padding: 15px;
 
-            border:
-                1px solid rgba(255,255,255,0.06);
+    text-align: center;
 
-            outline: none;
+    color: #64748a;
 
-            padding: 13px 17px;
+    font-weight: bold;
 
-            border-radius: 25px;
+    cursor: pointer;
 
-            font-size: 15px;
+    position: relative;
+}
 
-            background:
-                rgba(255,255,255,0.045);
+.tab.active {
+    color: var(--bright);
+}
 
-            color: white;
+.tab.active::after {
 
-            box-shadow:
-                inset 0 1px 8px rgba(0,0,0,0.25);
-        }
+    content: "";
 
-        .search::placeholder {
+    position: absolute;
 
-            color: #65748a;
-        }
+    bottom: 0;
 
-        .search:focus {
+    left: 25%;
 
-            border-color:
-                rgba(22,131,255,0.55);
+    width: 50%;
 
-            box-shadow:
-                0 0 15px
-                rgba(22,131,255,0.12);
-        }
+    height: 3px;
 
+    border-radius: 10px;
 
-        /* TABS */
+    background:
+        linear-gradient(
+            90deg,
+            #087cff,
+            #43b1ff
+        );
 
-        .tabs {
+    box-shadow:
+        0 0 12px
+        rgba(22,131,255,.8);
+}
 
-            display: flex;
 
-            background:
-                rgba(4,9,17,0.98);
+/* MAIN */
 
-            border-bottom:
-                1px solid var(--line);
+main {
+    min-height: 500px;
+    padding-bottom: 100px;
+}
 
-            position: sticky;
 
-            top: 91px;
+/* EMPTY */
 
-            z-index: 9;
-        }
+.empty {
 
-        .tab {
+    min-height: 430px;
 
-            flex: 1;
+    display: flex;
 
-            padding: 15px 5px;
+    flex-direction: column;
 
-            text-align: center;
+    align-items: center;
 
-            font-weight: bold;
+    justify-content: center;
 
-            color: #65748a;
+    text-align: center;
 
-            cursor: pointer;
+    padding: 30px;
+}
 
-            user-select: none;
+.empty-icon {
 
-            position: relative;
+    width: 75px;
 
-            transition:
-                color 0.2s;
-        }
+    height: 75px;
 
-        .tab.active {
+    border-radius: 50%;
 
-            color: #43aaff;
+    display: flex;
 
-            text-shadow:
-                0 0 12px
-                rgba(22,131,255,0.55);
-        }
+    align-items: center;
 
-        .tab.active::after {
+    justify-content: center;
 
-            content: "";
+    font-size: 34px;
 
-            position: absolute;
+    margin-bottom: 20px;
 
-            bottom: 0;
+    background:
+        rgba(22,131,255,.08);
 
-            left: 25%;
+    border:
+        1px solid
+        rgba(22,131,255,.2);
 
-            width: 50%;
+    box-shadow:
+        0 0 25px
+        rgba(22,131,255,.12);
+}
 
-            height: 3px;
+.empty h2 {
 
-            background:
-                linear-gradient(
-                    90deg,
-                    #087cff,
-                    #42b2ff
-                );
+    color: #dceaff;
 
-            border-radius: 5px;
+    margin-bottom: 8px;
+}
 
-            box-shadow:
-                0 0 10px
-                rgba(22,131,255,0.8);
-        }
+.empty p {
 
+    color: var(--muted);
 
-        /* CONTENT */
+    line-height: 1.5;
 
-        .content {
+    max-width: 280px;
+}
 
-            width: 100%;
 
-            min-height: 500px;
+/* CONTACT */
 
-            padding-bottom: 100px;
-        }
+.contact {
 
+    padding: 15px 16px;
 
-        /* EMPTY STATE */
+    display: flex;
 
-        .empty {
+    align-items: center;
 
-            display: flex;
+    gap: 13px;
 
-            flex-direction: column;
+    border-bottom:
+        1px solid
+        var(--line);
 
-            align-items: center;
+    cursor: pointer;
+}
 
-            justify-content: center;
+.avatar {
 
-            text-align: center;
+    width: 52px;
+    height: 52px;
 
-            padding: 90px 25px;
+    flex-shrink: 0;
 
-            color: #6c7c92;
-        }
+    border-radius: 50%;
 
-        .empty-icon {
+    display: flex;
 
-            width: 75px;
+    align-items: center;
+    justify-content: center;
 
-            height: 75px;
+    background:
+        linear-gradient(
+            135deg,
+            #116bc7,
+            #063b76
+        );
 
-            border-radius: 50%;
+    border:
+        1px solid
+        rgba(58,168,255,.3);
 
-            display: flex;
+    font-weight: bold;
 
-            align-items: center;
+    font-size: 19px;
+}
 
-            justify-content: center;
+.contact-info {
+    flex: 1;
+}
 
-            font-size: 34px;
+.contact-name {
 
-            margin-bottom: 20px;
+    font-weight: bold;
 
-            background:
-                rgba(22,131,255,0.08);
+    color: #edf5ff;
 
-            border:
-                1px solid
-                rgba(22,131,255,0.2);
+    margin-bottom: 5px;
+}
 
-            box-shadow:
-                0 0 25px
-                rgba(22,131,255,0.12);
-        }
+.contact-phone {
 
-        .empty h2 {
+    color: var(--muted);
 
-            color: #dceaff;
+    font-size: 13px;
+}
 
-            margin-bottom: 8px;
 
-            font-size: 20px;
-        }
+/* NEW CHAT */
 
-        .empty p {
+.new-chat {
 
-            color: #65748a;
+    position: fixed;
 
-            font-size: 14px;
+    right: 22px;
 
-            max-width: 280px;
+    bottom: 25px;
 
-            line-height: 1.5;
-        }
+    width: 60px;
 
+    height: 60px;
 
-        /* FLOATING BUTTON */
+    border: none;
 
-        .new-chat {
+    border-radius: 50%;
 
-            position: fixed;
+    background:
+        linear-gradient(
+            135deg,
+            #1691ff,
+            #005bc1
+        );
 
-            right: 20px;
+    color: white;
 
-            bottom: 25px;
+    font-size: 30px;
 
-            width: 58px;
+    cursor: pointer;
 
-            height: 58px;
+    box-shadow:
+        0 0 25px
+        rgba(22,131,255,.5);
 
-            border-radius: 50%;
+    z-index: 30;
+}
 
-            border:
-                1px solid
-                rgba(110,191,255,0.5);
+.new-chat:active {
+    transform: scale(.9);
+}
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #1691ff,
-                    #005bc1
-                );
 
-            color: white;
+/* MODAL */
 
-            font-size: 29px;
+.modal {
 
-            box-shadow:
-                0 0 22px
-                rgba(22,131,255,0.45),
+    position: fixed;
 
-                0 8px 20px
-                rgba(0,0,0,0.4);
+    inset: 0;
 
-            cursor: pointer;
+    background:
+        rgba(0,0,0,.72);
 
-            z-index: 20;
-        }
+    backdrop-filter: blur(10px);
 
-        .new-chat:active {
+    display: none;
 
-            transform: scale(0.92);
-        }
+    align-items: center;
 
+    justify-content: center;
 
-        /* STATUS / CALLS */
+    padding: 20px;
 
-        .section-empty {
+    z-index: 100;
+}
 
-            min-height: 350px;
+.modal-card {
 
-            display: flex;
+    width: 100%;
 
-            flex-direction: column;
+    max-width: 400px;
 
-            align-items: center;
+    background:
+        linear-gradient(
+            145deg,
+            #0c1a2c,
+            #040a13
+        );
 
-            justify-content: center;
+    border:
+        1px solid
+        rgba(22,131,255,.25);
 
-            text-align: center;
+    border-radius: 22px;
 
-            padding: 30px;
-        }
+    padding: 25px;
 
-        .section-empty-icon {
+    box-shadow:
+        0 0 45px
+        rgba(22,131,255,.2);
+}
 
-            font-size: 45px;
+.modal-card h2 {
 
-            margin-bottom: 15px;
+    margin-bottom: 8px;
 
-            filter:
-                drop-shadow(
-                    0 0 12px
-                    rgba(22,131,255,0.4)
-                );
-        }
+    color: #e9f4ff;
+}
 
-        .section-empty h2 {
+.modal-card p {
 
-            color: #dceaff;
+    color: var(--muted);
 
-            margin-bottom: 8px;
-        }
+    font-size: 14px;
 
-        .section-empty p {
+    margin-bottom: 18px;
+}
 
-            color: #65748a;
+.modal-card input {
 
-            font-size: 14px;
-        }
+    width: 100%;
 
+    padding: 14px;
 
-        /* DESKTOP */
+    border-radius: 12px;
 
-        @media (min-width: 700px) {
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
-            body {
+    background:
+        rgba(255,255,255,.05);
 
-                display: flex;
+    color: white;
 
-                justify-content: center;
+    outline: none;
 
-                align-items: center;
+    margin-bottom: 12px;
+}
 
-                padding: 20px;
-            }
+.primary {
 
-            .app {
+    width: 100%;
 
-                min-height: 95vh;
+    padding: 14px;
 
-                max-height: 95vh;
+    border: none;
 
-                overflow-y: auto;
+    border-radius: 12px;
 
-                border-radius: 18px;
+    background:
+        linear-gradient(
+            135deg,
+            #168fff,
+            #0062cf
+        );
 
-                border:
-                    1px solid
-                    rgba(22,131,255,0.14);
+    color: white;
 
-                box-shadow:
-                    0 0 50px
-                    rgba(0,0,0,0.7),
+    font-weight: bold;
 
-                    0 0 25px
-                    rgba(22,131,255,0.08);
-            }
+    cursor: pointer;
+}
 
-            .new-chat {
+.close {
 
-                position: absolute;
-            }
-        }
+    width: 100%;
 
-    </style>
+    padding: 12px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #7d8da4;
+
+    margin-top: 8px;
+
+    cursor: pointer;
+}
+
+
+/* FOUND USER */
+
+.found-user {
+
+    display: none;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(22,131,255,.08);
+
+    border:
+        1px solid
+        rgba(22,131,255,.15);
+
+    margin-bottom: 15px;
+}
+
+.wave {
+
+    margin-top: 12px;
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #168fff,
+            #0062cf
+        );
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* CHAT SCREEN */
+
+.chat-screen {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #07101d,
+            #02060d
+        );
+
+    z-index: 200;
+
+    display: none;
+
+    flex-direction: column;
+}
+
+.chat-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0b1c32,
+            #050b15
+        );
+
+    border-bottom:
+        1px solid
+        rgba(22,131,255,.15);
+}
+
+.back {
+
+    border: none;
+
+    background: transparent;
+
+    color: #cce4ff;
+
+    font-size: 28px;
+
+    cursor: pointer;
+}
+
+.chat-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.chat-title-text {
+
+    font-weight: bold;
+
+    color: white;
+}
+
+.chat-body {
+
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 20px 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.bubble {
+
+    max-width: 78%;
+
+    padding: 11px 14px;
+
+    border-radius: 16px;
+
+    font-size: 15px;
+
+    line-height: 1.4;
+}
+
+.bubble.mine {
+
+    align-self: flex-end;
+
+    background:
+        linear-gradient(
+            135deg,
+            #168fff,
+            #0066d5
+        );
+
+    border-bottom-right-radius: 4px;
+}
+
+.bubble.theirs {
+
+    align-self: flex-start;
+
+    background:
+        #101d2d;
+
+    border:
+        1px solid
+        rgba(255,255,255,.05);
+
+    border-bottom-left-radius: 4px;
+}
+
+.chat-input {
+
+    display: flex;
+
+    gap: 8px;
+
+    padding: 12px;
+
+    background:
+        #050b14;
+
+    border-top:
+        1px solid
+        var(--line);
+}
+
+.chat-input input {
+
+    flex: 1;
+
+    border: none;
+
+    outline: none;
+
+    border-radius: 22px;
+
+    padding: 13px 15px;
+
+    background:
+        #101b2a;
+
+    color: white;
+}
+
+.send {
+
+    width: 48px;
+
+    height: 48px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #168fff,
+            #0062cf
+        );
+
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+/* MENU */
+
+.menu-screen {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 300;
+
+    display: none;
+
+    flex-direction: column;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(22,131,255,.2),
+            transparent 45%
+        ),
+        #02060d;
+
+    animation:
+        menuIn .25s ease;
+}
+
+@keyframes menuIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-top {
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border-bottom:
+        1px solid
+        rgba(22,131,255,.15);
+}
+
+.menu-back {
+
+    border: none;
+
+    background: transparent;
+
+    color: #cce4ff;
+
+    font-size: 29px;
+
+    cursor: pointer;
+}
+
+.menu-title {
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #e9f5ff;
+}
+
+.menu-content {
+
+    padding: 35px 22px;
+}
+
+.menu-brand {
+
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+.menu-brand h1 {
+
+    font-size: 34px;
+
+    letter-spacing: 5px;
+
+    color: #45adff;
+
+    text-shadow:
+        0 0 25px
+        rgba(22,131,255,.6);
+}
+
+.menu-brand p {
+
+    margin-top: 8px;
+
+    color: #65748a;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+}
+
+.coming {
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    background:
+        rgba(22,131,255,.05);
+
+    border:
+        1px solid
+        rgba(22,131,255,.16);
+
+    box-shadow:
+        inset 0 0 30px
+        rgba(22,131,255,.03);
+}
+
+.coming-icon {
+
+    font-size: 45px;
+
+    margin-bottom: 15px;
+}
+
+.coming h2 {
+
+    color: #eaf5ff;
+
+    margin-bottom: 10px;
+}
+
+.coming p {
+
+    color: #718198;
+
+    line-height: 1.6;
+
+    font-size: 14px;
+}
+
+</style>
 
 </head>
 
@@ -593,188 +1014,361 @@
 <div class="app">
 
 
-    <!-- HEADER -->
+<header class="header">
 
-    <header class="header">
+    <div class="top">
 
-        <div class="top-bar">
+        <div class="brand-box">
 
-            <div class="logo-section">
+            <div class="logo">
+                J
+            </div>
 
-                <div class="logo">
-                    J
-                </div>
+            <div class="brand">
+                JAYRIX
+            </div>
 
-                <div class="brand">
+        </div>
+
+
+        <button
+            class="menu-button"
+            onclick="openMenu()"
+        >
+            ⋮
+        </button>
+
+    </div>
+
+
+    <input
+        class="search"
+        id="search"
+        placeholder="Search chats..."
+    >
+
+</header>
+
+
+<div class="tabs">
+
+    <div
+        class="tab active"
+        id="chatsTab"
+        onclick="showTab('chats')"
+    >
+        Chats
+    </div>
+
+    <div
+        class="tab"
+        id="statusTab"
+        onclick="showTab('status')"
+    >
+        Status
+    </div>
+
+    <div
+        class="tab"
+        id="callsTab"
+        onclick="showTab('calls')"
+    >
+        Calls
+    </div>
+
+</div>
+
+
+<main>
+
+
+<section id="chats">
+
+    <div
+        id="chatList"
+        class="empty"
+    >
+
+        <div class="empty-icon">
+            💬
+        </div>
+
+        <h2>
+            No conversations
+        </h2>
+
+        <p>
+            Start a conversation with
+            another JAYRIX user.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section
+    id="status"
+    style="display:none;"
+>
+
+    <div class="empty">
+
+        <div class="empty-icon">
+            ◉
+        </div>
+
+        <h2>
+            Coming soon
+        </h2>
+
+        <p>
+            JAYRIX Status is being built.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section
+    id="calls"
+    style="display:none;"
+>
+
+    <div class="empty">
+
+        <div class="empty-icon">
+            ☎
+        </div>
+
+        <h2>
+            Coming soon
+        </h2>
+
+        <p>
+            Voice and video calls are coming.
+        </p>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<button
+    class="new-chat"
+    onclick="openNewChat()"
+>
+    +
+</button>
+
+
+</div>
+
+
+<!-- NEW CHAT MODAL -->
+
+<div
+    class="modal"
+    id="newChatModal"
+>
+
+    <div class="modal-card">
+
+        <h2>
+            New conversation
+        </h2>
+
+        <p>
+            Enter the phone number of a
+            JAYRIX user.
+        </p>
+
+
+        <input
+            id="phoneSearch"
+            type="tel"
+            placeholder="Phone number"
+        >
+
+
+        <div
+            class="found-user"
+            id="foundUser"
+        >
+
+            <div
+                id="foundName"
+                class="contact-name"
+            ></div>
+
+            <div
+                id="foundPhone"
+                class="contact-phone"
+            ></div>
+
+
+            <button
+                class="wave"
+                onclick="sendWave()"
+            >
+                👋 Send a wave
+            </button>
+
+        </div>
+
+
+        <button
+            class="primary"
+            onclick="findUser()"
+        >
+            Find user
+        </button>
+
+
+        <button
+            class="close"
+            onclick="closeNewChat()"
+        >
+            Cancel
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- CHAT SCREEN -->
+
+<div
+    class="chat-screen"
+    id="chatScreen"
+>
+
+    <div class="chat-header">
+
+        <button
+            class="back"
+            onclick="closeChat()"
+        >
+            ←
+        </button>
+
+
+        <div class="chat-title">
+
+            <div
+                class="avatar"
+                id="chatAvatar"
+            >
+                J
+            </div>
+
+            <div>
+
+                <div
+                    class="chat-title-text"
+                    id="chatName"
+                >
                     JAYRIX
                 </div>
 
             </div>
 
-
-            <div class="header-icons">
-
-                <span
-                    class="icon"
-                    onclick="showSearch()"
-                >
-                    ⌕
-                </span>
-
-                <span
-                    class="icon"
-                    onclick="showMenu()"
-                >
-                    ⋮
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="search-container">
-
-            <input
-                type="text"
-                id="search"
-                class="search"
-                placeholder="Search chats..."
-            >
-
-        </div>
-
-    </header>
-
-
-    <!-- TABS -->
-
-    <div class="tabs">
-
-        <div
-            class="tab active"
-            id="chatsTab"
-            onclick="showTab('chats')"
-        >
-            Chats
-        </div>
-
-
-        <div
-            class="tab"
-            id="statusTab"
-            onclick="showTab('status')"
-        >
-            Status
-        </div>
-
-
-        <div
-            class="tab"
-            id="callsTab"
-            onclick="showTab('calls')"
-        >
-            Calls
         </div>
 
     </div>
 
 
-    <!-- CONTENT -->
-
-    <main class="content">
-
-
-        <!-- CHATS -->
-
-        <section id="chats">
-
-            <div class="empty">
-
-                <div class="empty-icon">
-                    💬
-                </div>
-
-                <h2>
-                    No conversations yet
-                </h2>
-
-                <p>
-                    Start a new conversation
-                    using the blue button below.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- STATUS -->
-
-        <section
-            id="status"
-            style="display:none;"
-        >
-
-            <div class="section-empty">
-
-                <div class="section-empty-icon">
-                    ◉
-                </div>
-
-                <h2>
-                    No status updates
-                </h2>
-
-                <p>
-                    Status features will be
-                    available soon.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- CALLS -->
-
-        <section
-            id="calls"
-            style="display:none;"
-        >
-
-            <div class="section-empty">
-
-                <div class="section-empty-icon">
-                    ☎
-                </div>
-
-                <h2>
-                    No calls yet
-                </h2>
-
-                <p>
-                    Your calls will appear here.
-                </p>
-
-            </div>
-
-        </section>
-
-
-    </main>
-
-
-    <!-- NEW CHAT -->
-
-    <button
-        class="new-chat"
-        onclick="newChat()"
-        aria-label="New chat"
+    <div
+        class="chat-body"
+        id="chatBody"
     >
-        +
-    </button>
+    </div>
 
+
+    <div class="chat-input">
+
+        <input
+            id="messageInput"
+            placeholder="Message..."
+            autocomplete="off"
+        >
+
+        <button
+            class="send"
+            onclick="sendMessage()"
+        >
+            ➤
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MENU -->
+
+<div
+    class="menu-screen"
+    id="menuScreen"
+>
+
+    <div class="menu-top">
+
+        <button
+            class="menu-back"
+            onclick="closeMenu()"
+        >
+            ←
+        </button>
+
+        <div class="menu-title">
+            JAYRIX MENU
+        </div>
+
+    </div>
+
+
+    <div class="menu-content">
+
+        <div class="menu-brand">
+
+            <h1>
+                JAYRIX
+            </h1>
+
+            <p>
+                FUTURE OF MESSAGING
+            </p>
+
+        </div>
+
+
+        <div class="coming">
+
+            <div class="coming-icon">
+                ⚡
+            </div>
+
+            <h2>
+                Coming Soon
+            </h2>
+
+            <p>
+                Settings, profiles, privacy,
+                notifications, appearance,
+                security and more futuristic
+                JAYRIX features are currently
+                being developed.
+            </p>
+
+        </div>
+
+    </div>
 
 </div>
 
@@ -782,101 +1376,219 @@
 <script>
 
 
-    function showTab(tab) {
+let selectedUser = null;
 
-        const chats =
-            document.getElementById("chats");
-
-        const status =
-            document.getElementById("status");
-
-        const calls =
-            document.getElementById("calls");
+let currentConversation = null;
 
 
-        const chatsTab =
-            document.getElementById("chatsTab");
+/* -------------------------
+   LOGIN CHECK
+------------------------- */
 
-        const statusTab =
-            document.getElementById("statusTab");
+async function checkLogin() {
 
-        const callsTab =
-            document.getElementById("callsTab");
+    try {
 
+        const response =
+            await fetch("/api/me");
 
-        chats.style.display = "none";
+        const data =
+            await response.json();
 
-        status.style.display = "none";
+        if (!data.logged_in) {
 
-        calls.style.display = "none";
+            window.location.href =
+                "login.html";
 
-
-        chatsTab.classList.remove("active");
-
-        statusTab.classList.remove("active");
-
-        callsTab.classList.remove("active");
-
-
-        if (tab === "chats") {
-
-            chats.style.display = "block";
-
-            chatsTab.classList.add("active");
+            return;
 
         }
 
+        loadChats();
 
-        if (tab === "status") {
+    } catch (error) {
 
-            status.style.display = "block";
+        console.log(error);
 
-            statusTab.classList.add("active");
+    }
 
-        }
+}
 
 
-        if (tab === "calls") {
+/* -------------------------
+   TABS
+------------------------- */
 
-            calls.style.display = "block";
+function showTab(tab) {
 
-            callsTab.classList.add("active");
+    const sections = [
+        "chats",
+        "status",
+        "calls"
+    ];
 
-        }
+    sections.forEach(id => {
+
+        document.getElementById(id)
+            .style.display = "none";
+
+    });
+
+
+    document
+        .getElementById(tab)
+        .style.display = "block";
+
+
+    document
+        .getElementById("chatsTab")
+        .classList.remove("active");
+
+    document
+        .getElementById("statusTab")
+        .classList.remove("active");
+
+    document
+        .getElementById("callsTab")
+        .classList.remove("active");
+
+
+    document
+        .getElementById(tab + "Tab")
+        .classList.add("active");
+
+}
+
+
+/* -------------------------
+   LOAD CHATS
+------------------------- */
+
+async function loadChats() {
+
+    const response =
+        await fetch("/api/chats");
+
+    const data =
+        await response.json();
+
+
+    const list =
+        document.getElementById("chatList");
+
+
+    if (
+        !data.success ||
+        data.chats.length === 0
+    ) {
+
+        list.className = "empty";
+
+        list.innerHTML = `
+
+            <div class="empty-icon">
+                💬
+            </div>
+
+            <h2>
+                No conversations
+            </h2>
+
+            <p>
+                Start a conversation with
+                another JAYRIX user.
+            </p>
+
+        `;
+
+        return;
 
     }
 
 
-    function newChat() {
-
-        alert(
-            "New chat will be available after user accounts are connected."
-        );
-
-    }
+    list.className = "";
 
 
-    function showSearch() {
+    list.innerHTML = data.chats
+        .map(chat => `
 
+            <div
+                class="contact"
+                onclick="openConversation(
+                    ${chat.other_id},
+                    '${escapeHtml(chat.username)}',
+                    ${chat.conversation_id}
+                )"
+            >
+
+                <div class="avatar">
+                    ${chat.username
+                        .charAt(0)
+                        .toUpperCase()}
+                </div>
+
+                <div class="contact-info">
+
+                    <div class="contact-name">
+                        ${escapeHtml(
+                            chat.username
+                        )}
+                    </div>
+
+                    <div class="contact-phone">
+                        ${escapeHtml(
+                            chat.phone
+                        )}
+                    </div>
+
+                </div>
+
+            </div>
+
+        `)
+        .join("");
+
+}
+
+
+/* -------------------------
+   NEW CHAT
+------------------------- */
+
+function openNewChat() {
+
+    document
+        .getElementById("newChatModal")
+        .style.display = "flex";
+
+}
+
+
+function closeNewChat() {
+
+    document
+        .getElementById("newChatModal")
+        .style.display = "none";
+
+    selectedUser = null;
+
+    document
+        .getElementById("foundUser")
+        .style.display = "none";
+
+    document
+        .getElementById("phoneSearch")
+        .value = "";
+
+}
+
+
+/* -------------------------
+   FIND USER
+------------------------- */
+
+async function findUser() {
+
+    const phone =
         document
-            .getElementById("search")
-            .focus();
-
-    }
-
-
-    function showMenu() {
-
-        alert(
-            "JAYRIX menu coming soon."
-        );
-
-    }
-
-
-</script>
-
-
-</body>
-
-</html>
+        .getElementById("
