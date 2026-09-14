@@ -5,91 +5,457 @@
     font-family: Arial, sans-serif;
 }
 
-body {
-    min-height: 100vh;
-    background: #eef5ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+:root {
+
+    --blue: #1683ff;
+    --bright: #43b1ff;
+
+    --dark: #02060d;
+    --panel: #07101d;
+
+    --text: #f4f8ff;
+    --muted: #718198;
+
 }
+
+
+/* PAGE */
+
+body {
+
+    min-height: 100vh;
+
+    background:
+
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(22,131,255,.18),
+            transparent 42%
+        ),
+
+        radial-gradient(
+            circle at 100% 100%,
+            rgba(22,131,255,.08),
+            transparent 35%
+        ),
+
+        #02050b;
+
+    color: var(--text);
+
+    overflow-x: hidden;
+}
+
+
+/* AUTH PAGE */
+
+.auth-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* BLUE BACKGROUND GLOW */
+
+.auth-glow {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(70px);
+
+    pointer-events: none;
+}
+
+
+.glow-one {
+
+    width: 220px;
+    height: 220px;
+
+    background:
+        rgba(22,131,255,.12);
+
+    top: -80px;
+    left: -70px;
+}
+
+
+.glow-two {
+
+    width: 250px;
+    height: 250px;
+
+    background:
+        rgba(22,131,255,.08);
+
+    right: -100px;
+    bottom: -100px;
+}
+
+
+/* AUTH CARD */
 
 .auth-container {
-    width: 90%;
-    max-width: 400px;
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+    width: 100%;
+
+    max-width: 420px;
+
+    padding: 34px 28px;
+
+    border-radius: 25px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(10,25,43,.97),
+            rgba(3,9,17,.98)
+        );
+
+    border:
+        1px solid
+        rgba(22,131,255,.18);
+
+    box-shadow:
+
+        0 25px 70px
+        rgba(0,0,0,.55),
+
+        0 0 35px
+        rgba(22,131,255,.08);
+
+    position: relative;
+
+    z-index: 2;
+
+    backdrop-filter: blur(15px);
 }
+
+
+/* LOGO */
 
 .logo {
-    width: 65px;
-    height: 65px;
+
+    width: 70px;
+    height: 70px;
+
     margin: 0 auto 15px;
-    background: #087cff;
-    color: white;
-    border-radius: 50% 50% 50% 8px;
+
+    border-radius:
+        50% 50% 50% 10px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
-    font-size: 32px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #35a7ff,
+            #087cff
+        );
+
+    color: white;
+
+    font-size: 35px;
+
     font-weight: bold;
+
+    box-shadow:
+
+        0 0 25px
+        rgba(22,131,255,.45),
+
+        inset 0 0 10px
+        rgba(255,255,255,.18);
 }
 
-h1 {
+
+/* BRAND */
+
+.brand {
+
     text-align: center;
-    color: #087cff;
-    font-size: 28px;
-    margin-bottom: 25px;
-    letter-spacing: 1px;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #55b5ff
+        );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
 }
 
-h2 {
+
+.subtitle {
+
     text-align: center;
-    color: #222;
-    margin-bottom: 20px;
+
+    color: #647992;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    margin-top: 8px;
+
+    margin-bottom: 30px;
 }
+
+
+/* LABELS */
+
+label {
+
+    display: block;
+
+    color: #a9bad0;
+
+    font-size: 13px;
+
+    margin-bottom: 7px;
+
+    margin-left: 2px;
+}
+
+
+/* INPUTS */
 
 input {
+
     width: 100%;
-    padding: 14px;
-    margin-bottom: 14px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+
+    padding: 14px 15px;
+
+    margin-bottom: 18px;
+
+    border-radius: 12px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
     outline: none;
+
+    background:
+        rgba(255,255,255,.045);
+
+    color: white;
+
     font-size: 15px;
+
+    transition:
+        border .2s,
+        box-shadow .2s,
+        background .2s;
 }
+
+
+input::placeholder {
+
+    color: #56667b;
+}
+
 
 input:focus {
-    border-color: #087cff;
-    box-shadow: 0 0 0 2px rgba(8, 124, 255, 0.1);
+
+    border-color:
+        rgba(22,131,255,.7);
+
+    background:
+        rgba(22,131,255,.045);
+
+    box-shadow:
+
+        0 0 0 3px
+        rgba(22,131,255,.08),
+
+        0 0 18px
+        rgba(22,131,255,.08);
 }
+
+
+/* BUTTON */
 
 button {
+
+    font-family: Arial, sans-serif;
+}
+
+
+form button {
+
     width: 100%;
-    padding: 14px;
+
+    padding: 15px;
+
     border: none;
-    border-radius: 10px;
-    background: #087cff;
+
+    border-radius: 12px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #168fff,
+            #0062cf
+        );
+
     color: white;
+
     font-size: 16px;
+
     font-weight: bold;
+
     cursor: pointer;
+
+    box-shadow:
+
+        0 8px 22px
+        rgba(22,131,255,.2);
+
+    transition:
+        transform .2s,
+        box-shadow .2s,
+        opacity .2s;
 }
 
-button:active {
-    transform: scale(0.98);
+
+form button:hover {
+
+    box-shadow:
+
+        0 10px 30px
+        rgba(22,131,255,.35);
 }
 
-p {
+
+form button:active {
+
+    transform: scale(.98);
+}
+
+
+form button:disabled {
+
+    opacity: .6;
+
+    cursor: not-allowed;
+}
+
+
+/* MESSAGE */
+
+.message {
+
+    min-height: 20px;
+
     text-align: center;
-    margin-top: 18px;
-    color: #666;
+
+    margin-top: 16px;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+}
+
+
+.message.success {
+
+    color: #43b1ff;
+
+    text-shadow:
+        0 0 10px
+        rgba(67,177,255,.3);
+}
+
+
+.message.error {
+
+    color: #ff5b76;
+}
+
+
+/* SWITCH */
+
+.switch {
+
+    text-align: center;
+
+    margin-top: 22px;
+
+    color: #68798f;
+
     font-size: 14px;
 }
 
-a {
-    color: #087cff;
+
+.switch a {
+
+    color: #43b1ff;
+
     text-decoration: none;
+
     font-weight: bold;
+
+    margin-left: 4px;
 }
+
+
+.switch a:hover {
+
+    text-decoration: underline;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 430px) {
+
+    .auth-page {
+
+        padding: 16px;
+    }
+
+    .auth-container {
+
+        padding: 30px 21px;
+
+        border-radius: 22px;
+    }
+
+    .brand {
+
+        font-size: 27px;
+    }
+
+    }
