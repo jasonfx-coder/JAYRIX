@@ -1,165 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>JAYRIX - Sign Up</title>
+<meta charset="UTF-8">
 
-    <link rel="stylesheet" href="style.css">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>JAYRIX - Create Account</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-<div class="auth-container">
 
-    <div class="logo">J</div>
+<div class="auth-page">
 
-    <h1>JAYRIX</h1>
 
-    <h2>Create Account</h2>
+    <div class="auth-glow glow-one"></div>
+    <div class="auth-glow glow-two"></div>
 
-    <form id="signupForm">
 
-        <input
-            type="text"
-            id="username"
-            placeholder="Username"
-            required
-        >
+    <div class="auth-container">
 
-        <input
-            type="email"
-            id="email"
-            placeholder="Email"
-            required
-        >
 
-        <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            required
-        >
+        <div class="logo">
+            J
+        </div>
 
-        <input
-            type="password"
-            id="confirmPassword"
-            placeholder="Confirm password"
-            required
-        >
 
-        <button type="submit">
-            Create Account
-        </button>
+        <div class="brand">
+            JAYRIX
+        </div>
 
-    </form>
 
-    <p id="message"></p>
+        <div class="subtitle">
+            CREATE YOUR ACCOUNT
+        </div>
 
-    <p>
-        Already have an account?
-        <a href="login.html">Login</a>
-    </p>
+
+        <form id="signupForm">
+
+
+            <label>
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Choose a username"
+                autocomplete="username"
+                required
+            >
+
+
+            <label>
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Your phone number"
+                autocomplete="tel"
+                required
+            >
+
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Your email address"
+                autocomplete="email"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Create a password"
+                autocomplete="new-password"
+                required
+            >
+
+
+            <label>
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                autocomplete="new-password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                id="signupButton"
+            >
+                Create Account
+            </button>
+
+
+        </form>
+
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <p class="switch">
+
+            Already have an account?
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </p>
+
+
+    </div>
+
 
 </div>
 
 
 <script>
 
-document
-.getElementById("signupForm")
-.addEventListener("submit", async function(event) {
-
-    event.preventDefault();
-
-    const username =
-        document.getElementById("username").value.trim();
-
-    const email =
-        document.getElementById("email").value.trim();
-
-    const password =
-        document.getElementById("password").value;
-
-    const confirmPassword =
-        document.getElementById("confirmPassword").value;
-
-    const message =
-        document.getElementById("message");
+const form =
+    document.getElementById(
+        "signupForm"
+    );
 
 
-    if (password !== confirmPassword) {
-
-        message.textContent =
-            "Passwords do not match.";
-
-        message.style.color = "#ff4d6d";
-
-        return;
-    }
+const button =
+    document.getElementById(
+        "signupButton"
+    );
 
 
-    try {
-
-        const response = await fetch("/api/signup", {
-
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-
-                username: username,
-                email: email,
-                password: password
-
-            })
-
-        });
+const message =
+    document.getElementById(
+        "message"
+    );
 
 
-        const data = await response.json();
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
 
 
-        if (data.success) {
+        const username =
+            document
+            .getElementById("username")
+            .value
+            .trim();
 
-            message.textContent =
-                "Account created successfully!";
 
-            message.style.color = "#1683ff";
+        const phone =
+            document
+            .getElementById("phone")
+            .value
+            .trim();
 
 
-            setTimeout(function() {
+        const email =
+            document
+            .getElementById("email")
+            .value
+            .trim();
 
-                window.location.href =
-                    "login.html";
 
-            }, 1000);
+        const password =
+            document
+            .getElementById("password")
+            .value;
 
-        } else {
 
-            message.textContent =
-                data.message;
+        const confirmPassword =
+            document
+            .getElementById("confirmPassword")
+            .value;
 
-            message.style.color = "#ff4d6d";
+
+        message.textContent = "";
+
+
+        if (
+            password !==
+            confirmPassword
+        ) {
+
+            showMessage(
+                "Passwords do not match.",
+                "error"
+            );
+
+            return;
 
         }
 
-    } catch (error) {
 
-        message.textContent =
-            "Unable to connect to JAYRIX.";
+        if (password.length < 6) {
 
-        message.style.color = "#ff4d6d";
+            showMessage(
+                "Password must be at least 6 characters.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        button.disabled = true;
+
+        button.textContent =
+            "Creating Account...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/signup",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                username:
+                                    username,
+
+                                phone:
+                                    phone,
+
+                                email:
+                                    email,
+
+                                password:
+                                    password
+
+                            })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (data.success) {
+
+                showMessage(
+                    "Account created successfully!",
+                    "success"
+                );
+
+
+                setTimeout(
+                    function() {
+
+                        window.location.href =
+                            "login.html";
+
+                    },
+                    1000
+                );
+
+
+            } else {
+
+                showMessage(
+                    data.message ||
+                    "Unable to create account.",
+                    "error"
+                );
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Create Account";
+
+            }
+
+
+        } catch (error) {
+
+            showMessage(
+                "Unable to connect to JAYRIX.",
+                "error"
+            );
+
+            button.disabled = false;
+
+            button.textContent =
+                "Create Account";
+
+        }
 
     }
+);
 
-});
+
+function showMessage(
+    text,
+    type
+) {
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+
+}
 
 </script>
 
+
 </body>
+
 </html>
