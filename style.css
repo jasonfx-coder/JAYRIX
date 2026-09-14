@@ -18,7 +18,7 @@ body {
     max-width: 400px;
     background: white;
     padding: 30px;
-    border-radius: 18px;
+    border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
@@ -39,11 +39,14 @@ body {
 h1 {
     text-align: center;
     color: #087cff;
+    font-size: 28px;
     margin-bottom: 25px;
+    letter-spacing: 1px;
 }
 
 h2 {
     text-align: center;
+    color: #222;
     margin-bottom: 20px;
 }
 
@@ -59,6 +62,7 @@ input {
 
 input:focus {
     border-color: #087cff;
+    box-shadow: 0 0 0 2px rgba(8, 124, 255, 0.1);
 }
 
 button {
@@ -81,6 +85,7 @@ p {
     text-align: center;
     margin-top: 18px;
     color: #666;
+    font-size: 14px;
 }
 
 a {
