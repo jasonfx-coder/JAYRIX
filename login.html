@@ -1,133 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>JAYRIX - Login</title>
+<meta charset="UTF-8">
 
-    <link rel="stylesheet" href="style.css">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>JAYRIX - Login</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-<div class="auth-container">
 
-    <div class="logo">J</div>
+<div class="auth-page">
 
-    <h1>JAYRIX</h1>
 
-    <h2>Welcome Back</h2>
+    <div class="auth-glow glow-one"></div>
+    <div class="auth-glow glow-two"></div>
 
-    <form id="loginForm">
 
-        <input
-            type="email"
-            id="email"
-            placeholder="Email"
-            required
-        >
+    <div class="auth-container">
 
-        <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            required
-        >
 
-        <button type="submit">
-            Login
-        </button>
+        <div class="logo">
+            J
+        </div>
 
-    </form>
 
-    <p id="message"></p>
+        <div class="brand">
+            JAYRIX
+        </div>
 
-    <p>
-        Don't have an account?
-        <a href="signup.html">Sign up</a>
-    </p>
+
+        <div class="subtitle">
+            WELCOME BACK
+        </div>
+
+
+        <form id="loginForm">
+
+
+            <label>
+                Phone Number or Email
+            </label>
+
+            <input
+                type="text"
+                id="identifier"
+                placeholder="Phone number or email"
+                autocomplete="username"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Your password"
+                autocomplete="current-password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                id="loginButton"
+            >
+                Login
+            </button>
+
+
+        </form>
+
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <p class="switch">
+
+            Don't have an account?
+
+            <a href="signup.html">
+                Create one
+            </a>
+
+        </p>
+
+
+    </div>
+
 
 </div>
 
 
 <script>
 
-document
-.getElementById("loginForm")
-.addEventListener("submit", async function(event) {
-
-    event.preventDefault();
-
-    const email =
-        document.getElementById("email").value.trim();
-
-    const password =
-        document.getElementById("password").value;
-
-    const message =
-        document.getElementById("message");
+const form =
+    document.getElementById(
+        "loginForm"
+    );
 
 
-    try {
-
-        const response = await fetch("/api/login", {
-
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-
-                email: email,
-                password: password
-
-            })
-
-        });
+const button =
+    document.getElementById(
+        "loginButton"
+    );
 
 
-        const data = await response.json();
+const message =
+    document.getElementById(
+        "message"
+    );
 
 
-        if (data.success) {
+form.addEventListener(
+    "submit",
+    async function(event) {
 
-            message.textContent =
-                "Login successful!";
-
-            message.style.color = "#1683ff";
+        event.preventDefault();
 
 
-            setTimeout(function() {
+        const identifier =
+            document
+            .getElementById("identifier")
+            .value
+            .trim();
 
-                window.location.href =
-                    "index.html";
 
-            }, 800);
+        const password =
+            document
+            .getElementById("password")
+            .value;
 
-        } else {
 
-            message.textContent =
-                data.message;
+        message.textContent = "";
 
-            message.style.color = "#ff4d6d";
+
+        button.disabled = true;
+
+        button.textContent =
+            "Logging in...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/login",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                identifier:
+                                    identifier,
+
+                                password:
+                                    password
+
+                            })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (data.success) {
+
+                showMessage(
+                    "Login successful!",
+                    "success"
+                );
+
+
+                setTimeout(
+                    function() {
+
+                        window.location.href =
+                            "index.html";
+
+                    },
+                    700
+                );
+
+
+            } else {
+
+                showMessage(
+                    data.message ||
+                    "Login failed.",
+                    "error"
+                );
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Login";
+
+            }
+
+
+        } catch (error) {
+
+            showMessage(
+                "Unable to connect to JAYRIX.",
+                "error"
+            );
+
+            button.disabled = false;
+
+            button.textContent =
+                "Login";
 
         }
 
-    } catch (error) {
-
-        message.textContent =
-            "Unable to connect to JAYRIX.";
-
-        message.style.color = "#ff4d6d";
-
     }
+);
 
-});
+
+function showMessage(
+    text,
+    type
+) {
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+
+}
 
 </script>
 
+
 </body>
+
 </html>
