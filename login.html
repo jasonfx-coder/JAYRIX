@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>JAYRIX - Login</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -17,16 +19,18 @@
 
     <h2>Welcome Back</h2>
 
-    <form>
+    <form id="loginForm">
 
         <input
             type="email"
+            id="email"
             placeholder="Email"
             required
         >
 
         <input
             type="password"
+            id="password"
             placeholder="Password"
             required
         >
@@ -37,12 +41,93 @@
 
     </form>
 
+    <p id="message"></p>
+
     <p>
         Don't have an account?
         <a href="signup.html">Sign up</a>
     </p>
 
 </div>
+
+
+<script>
+
+document
+.getElementById("loginForm")
+.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const message =
+        document.getElementById("message");
+
+
+    try {
+
+        const response = await fetch("/api/login", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                email: email,
+                password: password
+
+            })
+
+        });
+
+
+        const data = await response.json();
+
+
+        if (data.success) {
+
+            message.textContent =
+                "Login successful!";
+
+            message.style.color = "#1683ff";
+
+
+            setTimeout(function() {
+
+                window.location.href =
+                    "index.html";
+
+            }, 800);
+
+        } else {
+
+            message.textContent =
+                data.message;
+
+            message.style.color = "#ff4d6d";
+
+        }
+
+    } catch (error) {
+
+        message.textContent =
+            "Unable to connect to JAYRIX.";
+
+        message.style.color = "#ff4d6d";
+
+    }
+
+});
+
+</script>
 
 </body>
 </html>
